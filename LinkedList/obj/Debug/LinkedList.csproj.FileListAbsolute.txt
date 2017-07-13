@@ -1,0 +1,1 @@
+c:\users\алексей\documents\visual studio 2017\Projects\LinkedList\LinkedList\obj\Debug\LinkedList.csprojResolveAssemblyReference.cache
