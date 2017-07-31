@@ -39,7 +39,7 @@ namespace LinkedList
                 get { return _next; }
                 set
                 {
-                    if (value is Node<T1>)
+                    if (value is Node<T1> | value is null)
                         _next = value;
                     else
                         throw new ArgumentException("Value cannot be casted to Node<T1> type.");
@@ -270,6 +270,68 @@ namespace LinkedList
                 nodeA = temp;
             }
             _sentinel = newList._sentinel;
+        }
+
+          /// <summary>
+        /// Selection sort of all contained elements.
+        /// </summary>
+        /// <param name="ascending">If true will sort in ascending order; Otherwise - in descending.</param>
+        public void SelectionSort(bool ascending = false)
+        {
+            if (ascending)
+                SelectionAscendingSort();
+            else
+                SelectionDescendingSort();
+        }
+
+        private void SelectionAscendingSort()
+        {
+            T maximum = MaxValue();
+            MyList<T> newList = new MyList<T>(maximum);
+            Remove(maximum);
+            while(_sentinel.Next != null)
+            {
+                maximum = MaxValue();
+                newList.AddInTheBeginning(maximum);
+                Remove(maximum);
+            }
+            _sentinel = newList._sentinel;
+        }
+
+        private void SelectionDescendingSort()
+        {
+            T minimum = MinValue();
+            MyList<T> newList = new MyList<T>(minimum);
+            Remove(minimum);
+            while (_sentinel.Next != null)
+            {
+                minimum = MaxValue();
+                newList.Add(minimum);
+                Remove(minimum);
+            }
+            _sentinel = newList._sentinel;
+        }
+
+        public T MaxValue()
+        {
+            T max = _sentinel.Next.Data;
+            foreach(T value in this)
+            {
+                if (value.CompareTo(max) > 0)
+                    max = value;
+            }
+            return max;
+        }
+
+        public T MinValue()
+        {
+            T min = _sentinel.Next.Data;
+            foreach (T value in this)
+            {
+                if (value.CompareTo(min) < 0)
+                    min = value;
+            }
+            return min;
         }
 
         /// <summary>
