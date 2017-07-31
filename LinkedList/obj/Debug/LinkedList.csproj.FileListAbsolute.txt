@@ -1,1 +1,5 @@
 c:\users\алексей\documents\visual studio 2017\Projects\LinkedList\LinkedList\obj\Debug\LinkedList.csprojResolveAssemblyReference.cache
+C:\Users\Алексей\Documents\Visual Studio 2017\Projects\DataStructures\LinkedList\bin\Debug\LinkedList.dll
+C:\Users\Алексей\Documents\Visual Studio 2017\Projects\DataStructures\LinkedList\bin\Debug\LinkedList.pdb
+C:\Users\Алексей\Documents\Visual Studio 2017\Projects\DataStructures\LinkedList\obj\Debug\LinkedList.dll
+C:\Users\Алексей\Documents\Visual Studio 2017\Projects\DataStructures\LinkedList\obj\Debug\LinkedList.pdb

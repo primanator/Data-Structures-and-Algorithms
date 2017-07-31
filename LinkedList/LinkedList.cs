@@ -203,7 +203,16 @@ namespace LinkedList
         /// <summary>
         /// Insertion sort of all contained elements.
         /// </summary>
-        public void InsertionSort() //bool ascending = false
+        /// <param name="ascending">If true will sort in ascending order; Otherwise - in descending.</param>
+        public void InsertionSort(bool ascending = false)
+        {
+            if (ascending)
+                InsertionAscendingSort();
+            else
+                InsertionDescendingSort();
+        }
+
+        private void InsertionDescendingSort()
         {
             MyList<T> newList = new MyList<T>(_sentinel.Next.Data);
             Node<T> nodeA = _sentinel.Next.Next;
@@ -213,33 +222,49 @@ namespace LinkedList
                 Node<T> nodeB = newList._sentinel;
                 while (nodeB != null)
                 {
-                    //if (ascending)
-                    //{
-                    //    if (nodeB.Next.Data.CompareTo(nodeA.Data) > 0)
-                    //    {
-                    //        temp = nodeA.Next;
-                    //        nodeA.Next = nodeB.Next;
-                    //        nodeB.Next = nodeA;
-                    //        break;
-                    //    }
-                    //    nodeB = nodeB.Next;
-                    //}
-                    //else
+                    if (nodeB.Next.Data.CompareTo(nodeA.Data) <= 0)
                     {
-                        if (nodeB.Next.Data.CompareTo(nodeA.Data) <= 0)
-                        {
-                            temp = nodeA.Next;
-                            nodeA.Next = nodeB.Next;
-                            nodeB.Next = nodeA;
-                            break;
-                        }
-                        nodeB = nodeB.Next;
-                        if (nodeB.Next == null)
-                        {
-                            newList.Add(nodeA.Data);
-                            temp = nodeA.Next;
-                            break;
-                        }
+                        temp = nodeA.Next;
+                        nodeA.Next = nodeB.Next;
+                        nodeB.Next = nodeA;
+                        break;
+                    }
+                    nodeB = nodeB.Next;
+                    if (nodeB.Next == null)
+                    {
+                        newList.Add(nodeA.Data);
+                        temp = nodeA.Next;
+                        break;
+                    }
+                }
+                nodeA = temp;
+            }
+            _sentinel = newList._sentinel;
+        }
+
+        private void InsertionAscendingSort()
+        {
+            MyList<T> newList = new MyList<T>(_sentinel.Next.Data);
+            Node<T> nodeA = _sentinel.Next.Next;
+            Node<T> temp = null;
+            while (nodeA != null)
+            {
+                Node<T> nodeB = newList._sentinel;
+                while (nodeB != null)
+                {
+                    if (nodeB.Next.Data.CompareTo(nodeA.Data) > 0)
+                    {
+                        temp = nodeA.Next;
+                        nodeA.Next = nodeB.Next;
+                        nodeB.Next = nodeA;
+                        break;
+                    }
+                    nodeB = nodeB.Next;
+                    if (nodeB.Next == null)
+                    {
+                        newList.Add(nodeA.Data);
+                        temp = nodeA.Next;
+                        break;
                     }
                 }
                 nodeA = temp;
