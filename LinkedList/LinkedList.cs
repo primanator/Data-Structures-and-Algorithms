@@ -9,7 +9,7 @@ namespace LinkedList
     /// Represents a strongly typed linked list of objects. Provides methods to search, sort, and manipulate linked lists.
     /// </summary>
     /// <typeparam name="T">The type of elements in the list.</typeparam>
-    public class MyList<T> : ICollection<T>, IEnumerable<T>, IEnumerable where T : IComparable<T>
+    public class SinglyLinkedList<T> : ICollection<T>, IEnumerable<T>, IEnumerable where T : IComparable<T>
     {
         private class Node<T1>
         {
@@ -50,21 +50,21 @@ namespace LinkedList
         private Node<T> _sentinel = null;
         private int count = 0;
 
-        /// <summary>Gets the number of elements contained in the MyList&lt;T&gt;.
-        /// <returns>A return value is the number of elements contained in the MyList&lt;T&gt;.</returns>
+        /// <summary>Gets the number of elements contained in the SinglyLinkedList&lt;T&gt;.
+        /// <returns>A return value is the number of elements contained in the SinglyLinkedList&lt;T&gt;.</returns>
         /// </summary>
         public int Count { get { return count; } }
 
-        /// <summary>Gets a value indicating whether the MyList&lt;T&gt; is read-only.
+        /// <summary>Gets a value indicating whether the SinglyLinkedList&lt;T&gt; is read-only.
         /// <returns>A return value is false since collection can be modified.</returns>
         /// </summary>
         public bool IsReadOnly { get { return false; } }
 
         /// <summary>
-        /// Constructor for MyList&lt;T&gt; collection.
+        /// Constructor for SinglyLinkedList&lt;T&gt; collection.
         /// </summary>
         /// <param name="item">The first object which will be contained in collection.</param>
-        public MyList(T item)
+        public SinglyLinkedList(T item)
         {
             Node<T> newnode = new Node<T>(item, null);
             _sentinel = new Node<T>(default(T), newnode);
@@ -72,7 +72,7 @@ namespace LinkedList
         }
 
         /// <summary>
-        /// Adds value in the beginning of MyList&lt;T&gt; collection.
+        /// Adds value in the beginning of SinglyLinkedList&lt;T&gt; collection.
         /// </summary>
         /// <param name="item">Adeed object.</param>
         public void AddInTheBeginning(T item)
@@ -82,7 +82,7 @@ namespace LinkedList
         }
 
         /// <summary>
-        /// Adds value in the end of MyList&lt;T&gt; collection.
+        /// Adds value in the end of SinglyLinkedList&lt;T&gt; collection.
         /// </summary>
         /// <param name="item">Added object.</param>
         public void Add(T item)
@@ -95,7 +95,7 @@ namespace LinkedList
         }
 
         /// <summary>
-        /// Adds value to MyList&lt;T&gt; collection.
+        /// Adds value to SinglyLinkedList&lt;T&gt; collection.
         /// </summary>
         /// <param name="afterme">The value after which new one will be added.</param>
         /// <param name="item">Added object.</param>
@@ -187,10 +187,10 @@ namespace LinkedList
         /// <summary>
         /// Gets copy of list.
         /// </summary>
-        /// <returns>Returns a new instance of MyList&lt;T&gt; with the same elements.</returns>
-        public MyList<T> GetCopy()
+        /// <returns>Returns a new instance of SinglyLinkedList&lt;T&gt; with the same elements.</returns>
+        public SinglyLinkedList<T> GetCopy()
         {
-            MyList<T> newList = new MyList<T>(_sentinel.Next.Data);
+            SinglyLinkedList<T> newList = new SinglyLinkedList<T>(_sentinel.Next.Data);
             Node<T> node = _sentinel.Next.Next;
             while (node != null)
             {
@@ -214,7 +214,7 @@ namespace LinkedList
 
         private void InsertionDescendingSort()
         {
-            MyList<T> newList = new MyList<T>(_sentinel.Next.Data);
+            SinglyLinkedList<T> newList = new SinglyLinkedList<T>(_sentinel.Next.Data);
             Node<T> nodeA = _sentinel.Next.Next;
             Node<T> temp = null;
             while (nodeA != null)
@@ -244,7 +244,7 @@ namespace LinkedList
 
         private void InsertionAscendingSort()
         {
-            MyList<T> newList = new MyList<T>(_sentinel.Next.Data);
+            SinglyLinkedList<T> newList = new SinglyLinkedList<T>(_sentinel.Next.Data);
             Node<T> nodeA = _sentinel.Next.Next;
             Node<T> temp = null;
             while (nodeA != null)
@@ -287,7 +287,7 @@ namespace LinkedList
         private void SelectionAscendingSort()
         {
             T maximum = MaxValue();
-            MyList<T> newList = new MyList<T>(maximum);
+            SinglyLinkedList<T> newList = new SinglyLinkedList<T>(maximum);
             Remove(maximum);
             while(_sentinel.Next != null)
             {
@@ -301,7 +301,7 @@ namespace LinkedList
         private void SelectionDescendingSort()
         {
             T minimum = MinValue();
-            MyList<T> newList = new MyList<T>(minimum);
+            SinglyLinkedList<T> newList = new SinglyLinkedList<T>(minimum);
             Remove(minimum);
             while (_sentinel.Next != null)
             {
@@ -335,12 +335,12 @@ namespace LinkedList
         }
 
         /// <summary>
-        /// Returns an enumerator that iterates through the MyList&lt;T&gt;
+        /// Returns an enumerator that iterates through the SinglyLinkedList&lt;T&gt;
         /// </summary>
-        /// <returns>MyList&lt;T&gt; Enumerator for the MyList&lt;T&gt;</returns>
+        /// <returns>SinglyLinkedList&lt;T&gt; Enumerator for the SinglyLinkedList&lt;T&gt;</returns>
         public IEnumerator<T> GetEnumerator()
         {
-            return new MyListEnumerator(this);
+            return new SinglyLinkedListEnumerator(this);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -348,13 +348,13 @@ namespace LinkedList
             throw new NotImplementedException();
         }
 
-        private class MyListEnumerator : IEnumerator<T>
+        private class SinglyLinkedListEnumerator : IEnumerator<T>
         {
-            private MyList<T> list { set; get; }
+            private SinglyLinkedList<T> list { set; get; }
             private int position;
             private Node<T> current;
 
-            public MyListEnumerator(MyList<T> list)
+            public SinglyLinkedListEnumerator(SinglyLinkedList<T> list)
             {
                 this.list = list;
                 current = list._sentinel;
@@ -413,7 +413,7 @@ namespace LinkedList
         /// <returns>True if the specified object is equal to the current object. Otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            MyList<T> objList = obj as MyList<T>;
+            SinglyLinkedList<T> objList = obj as SinglyLinkedList<T>;
             if (objList != null)
             {
                 if (objList.GetHashCode() == GetHashCode())
@@ -421,17 +421,17 @@ namespace LinkedList
                 return false;
             }
             else
-                throw new InvalidCastException("Argument obj cannot be casted into MyList<T1> type.");
+                throw new InvalidCastException("Argument obj cannot be casted into SinglyLinkedList<T1> type.");
         }
 
         /// <summary>
-        /// Hash function for MyList&lt;T&gt;.
+        /// Hash function for SinglyLinkedList&lt;T&gt;.
         /// </summary>
         /// <returns>A hash code for the current object.</returns>
         public override int GetHashCode()
         {
             int hash = 1;
-            foreach (var x in this)
+            foreach (T x in this)
             {
                 checked { hash *= x.GetHashCode(); }
             }
