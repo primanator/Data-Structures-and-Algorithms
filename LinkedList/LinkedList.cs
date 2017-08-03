@@ -61,6 +61,14 @@ namespace LinkedList
         public bool IsReadOnly { get { return false; } }
 
         /// <summary>
+        /// Default constructor for SinglyLinkedList&lt;T&gt; collection.
+        /// </summary>
+        public SinglyLinkedList()
+        {
+            _sentinel = new Node<T>(default(T), null);
+        }
+
+        /// <summary>
         /// Constructor for SinglyLinkedList&lt;T&gt; collection.
         /// </summary>
         /// <param name="item">The first object which will be contained in collection.</param>
@@ -137,6 +145,7 @@ namespace LinkedList
         public void Clear()
         {
             _sentinel.Next = null;
+            count = 0;
         }
 
         /// <summary>
