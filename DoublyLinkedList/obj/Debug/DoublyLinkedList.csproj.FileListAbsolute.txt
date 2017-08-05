@@ -1,4 +1,5 @@
 C:\Users\Алексей\Documents\Visual Studio 2017\Projects\DataStructures\DoublyLinkedList\bin\Debug\DoublyLinkedList.dll
 C:\Users\Алексей\Documents\Visual Studio 2017\Projects\DataStructures\DoublyLinkedList\bin\Debug\DoublyLinkedList.pdb
+C:\Users\Алексей\Documents\Visual Studio 2017\Projects\DataStructures\DoublyLinkedList\obj\Debug\DoublyLinkedList.csprojResolveAssemblyReference.cache
 C:\Users\Алексей\Documents\Visual Studio 2017\Projects\DataStructures\DoublyLinkedList\obj\Debug\DoublyLinkedList.dll
 C:\Users\Алексей\Documents\Visual Studio 2017\Projects\DataStructures\DoublyLinkedList\obj\Debug\DoublyLinkedList.pdb

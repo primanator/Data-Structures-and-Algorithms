@@ -314,8 +314,8 @@ namespace LinkedList
             Remove(minimum);
             while (_sentinel.Next != null)
             {
-                minimum = MaxValue();
-                newList.Add(minimum);
+                minimum = MinValue();
+                newList.AddInTheBeginning(minimum);
                 Remove(minimum);
             }
             _sentinel = newList._sentinel;
