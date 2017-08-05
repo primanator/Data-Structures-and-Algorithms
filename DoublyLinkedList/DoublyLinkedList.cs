@@ -144,7 +144,10 @@ namespace DoublyLinkedList
             if (beforeMeNode == null)
                 throw new ArgumentException("There is no such \"beforeme\" element in this list.");
             Node<T> newNode = new Node<T>(item, beforeMeNode.Previous, beforeMeNode);
-            beforeMeNode.Previous.Next = newNode;
+            if (beforeMeNode.Previous == null)
+                _upper_sentinel.Next = newNode;
+            else
+                beforeMeNode.Previous.Next = newNode;
             beforeMeNode.Previous = newNode;
             count++;
         }
@@ -358,6 +361,151 @@ namespace DoublyLinkedList
                 checked { hash *= x.GetHashCode(); }
             }
             return hash;
+        }
+
+        /// <summary>
+        /// Insertion sort of all contained elements.
+        /// </summary>
+        /// <param name="ascending">If true will sort in ascending order; Otherwise - in descending.</param>
+        public void InsertionSort(bool ascending = false)
+        {
+            if (ascending)
+                InsertionAscendingSort();
+            else
+                InsertionDescendingSort();
+        }
+
+        private void InsertionDescendingSort()
+        {
+            DoublyLinkedList<T> newList = new DoublyLinkedList<T>(_upper_sentinel.Next.Data);
+            Node<T> nodeA = _upper_sentinel.Next.Next;
+            Node<T> temp = null;
+            while (nodeA != null)
+            {
+                Node<T> nodeB = newList._upper_sentinel.Next;
+                while (nodeB != null)
+                {
+                    if (nodeB.Data.CompareTo(nodeA.Data) <= 0)
+                    {
+                        temp = nodeA.Next;
+                        newList.AddBefore(nodeB.Data, nodeA.Data);
+                        break;
+                    }
+                    nodeB = nodeB.Next;
+                    if (nodeB == null)
+                    {
+                        newList.Add(nodeA.Data);
+                        temp = nodeA.Next;
+                        break;
+                    }
+                }
+                nodeA = temp;
+            }
+            _upper_sentinel = newList._upper_sentinel;
+            _lower_sentinel = newList._lower_sentinel;
+        }
+
+        private void InsertionAscendingSort()
+        {
+            DoublyLinkedList<T> newList = new DoublyLinkedList<T>(_upper_sentinel.Next.Data);
+            Node<T> nodeA = _upper_sentinel.Next.Next;
+            Node<T> temp = null;
+            while (nodeA != null)
+            {
+                Node<T> nodeB = newList._upper_sentinel.Next;
+                while (nodeB != null)
+                {
+                    if (nodeB.Data.CompareTo(nodeA.Data) > 0)
+                    {
+                        temp = nodeA.Next;
+                        newList.AddBefore(nodeB.Data, nodeA.Data);
+                        break;
+                    }
+                    nodeB = nodeB.Next;
+                    if (nodeB == null)
+                    {
+                        newList.Add(nodeA.Data);
+                        temp = nodeA.Next;
+                        break;
+                    }
+                }
+                nodeA = temp;
+            }
+            _upper_sentinel = newList._upper_sentinel;
+            _lower_sentinel = newList._lower_sentinel;
+        }
+
+        /// <summary>
+        /// Selection sort of all contained elements.
+        /// </summary>
+        /// <param name="ascending">If true will sort in ascending order; Otherwise - in descending.</param>
+        public void SelectionSort(bool ascending = false)
+        {
+            if (ascending)
+                SelectionAscendingSort();
+            else
+                SelectionDescendingSort();
+        }
+
+        private void SelectionAscendingSort()
+        {
+            T maximum = MaxValue();
+            DoublyLinkedList<T> newList = new DoublyLinkedList<T>(maximum);
+            Remove(maximum);
+            while (_upper_sentinel.Next != null)
+            {
+                maximum = MaxValue();
+                newList.AddInTheBeginning(maximum);
+                Remove(maximum);
+            }
+            _upper_sentinel = newList._upper_sentinel;
+            _lower_sentinel = newList._lower_sentinel;
+        }
+
+        private void SelectionDescendingSort()
+        {
+            T minimum = MinValue();
+            DoublyLinkedList<T> newList = new DoublyLinkedList<T>(minimum);
+            Remove(minimum);
+            while (_upper_sentinel.Next != null)
+            {
+                minimum = MinValue();
+                newList.AddInTheBeginning(minimum);
+                Remove(minimum);
+            }
+            _upper_sentinel = newList._upper_sentinel;
+        }
+
+
+        /// <summary>
+        /// Maximum value in collection.
+        /// </summary>
+        /// <returns>T maximum</returns>
+        public T MaxValue()
+        {
+            T max = _upper_sentinel.Next.Data;
+            foreach (T value in this)
+            {
+                if (value.CompareTo(max) > 0)
+                    max = value;
+            }
+            return max;
+        }
+
+
+        /// <summary>
+        /// Minimum value in collection.
+        /// </summary>
+        /// <returns>T minimum</returns>
+        public T MinValue()
+        {
+            T min = _upper_sentinel.Next.Data;
+            foreach (T value in this)
+            {
+                if (value.CompareTo(min) < 0)
+                    min = value;
+            }
+            return min;
         }
     }
 }

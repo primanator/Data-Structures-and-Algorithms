@@ -281,7 +281,7 @@ namespace LinkedList
             _sentinel = newList._sentinel;
         }
 
-          /// <summary>
+        /// <summary>
         /// Selection sort of all contained elements.
         /// </summary>
         /// <param name="ascending">If true will sort in ascending order; Otherwise - in descending.</param>
